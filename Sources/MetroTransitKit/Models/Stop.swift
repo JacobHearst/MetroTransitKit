@@ -6,8 +6,8 @@
 //
 
 public struct Stop: Codable {
-    let stopId: Int
-    let latitude: Double
-    let longitude: Double
-    let description: String?
+    public let stopId: Int
+    public let latitude: Double
+    public let longitude: Double
+    public let description: String?
 }

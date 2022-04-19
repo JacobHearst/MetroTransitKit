@@ -6,7 +6,7 @@
 //
 
 public struct NexTripResult: Decodable {
-    let stops: [Stop]?
-    let alerts: [AlertMessage]?
-    let departures: [Departure]?
+    public let stops: [Stop]?
+    public let alerts: [AlertMessage]?
+    public let departures: [Departure]?
 }

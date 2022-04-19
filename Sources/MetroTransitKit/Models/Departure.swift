@@ -6,17 +6,17 @@
 //
 
 public struct Departure: Codable {
-    let actual: Bool
-    let tripId: String?
-    let stopId: Int
-    let departureText: String?
-    let departureTime: Int?
-    let description: String?
-    let gate: String?
-    let routeId: String?
-    let routeShortName: String?
-    let directionId: Int
-    let directionText: String?
-    let terminal: String?
-    let scheduleRelationship: String?
+    public let actual: Bool
+    public let tripId: String?
+    public let stopId: Int
+    public let departureText: String?
+    public let departureTime: Int?
+    public let description: String?
+    public let gate: String?
+    public let routeId: String?
+    public let routeShortName: String?
+    public let directionId: Int
+    public let directionText: String?
+    public let terminal: String?
+    public let scheduleRelationship: String?
 }

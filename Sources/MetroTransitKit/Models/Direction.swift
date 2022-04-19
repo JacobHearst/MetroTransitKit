@@ -6,6 +6,6 @@
 //
 
 public struct Direction: Codable {
-    let directionId: Int
-    let directionName: String?
+    public let directionId: Int
+    public let directionName: String?
 }

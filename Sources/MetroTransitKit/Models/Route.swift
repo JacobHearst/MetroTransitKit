@@ -6,7 +6,7 @@
 //
 
 public struct Route: Codable {
-    let routeId: String?
-    let agencyId: Int?
-    let routeLabel: String?
+    public let routeId: String?
+    public let agencyId: Int?
+    public let routeLabel: String?
 }

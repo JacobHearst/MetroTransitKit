@@ -6,6 +6,6 @@
 //
 
 public struct Agency: Codable {
-    let agencyId: Int
-    let agencyName: String?
+    public let agencyId: Int
+    public let agencyName: String?
 }

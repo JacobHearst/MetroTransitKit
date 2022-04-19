@@ -6,6 +6,6 @@
 //
 
 public struct AlertMessage: Codable {
-    let stopClosed: Bool
-    let alertText: String?
+    public let stopClosed: Bool
+    public let alertText: String?
 }

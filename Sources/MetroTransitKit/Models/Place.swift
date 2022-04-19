@@ -6,6 +6,6 @@
 //
 
 public struct Place: Codable {
-    let placeCode: String?
-    let description: String?
+    public let placeCode: String?
+    public let description: String?
 }

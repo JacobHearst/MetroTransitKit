@@ -6,15 +6,15 @@
 //
 
 public struct Vehicle: Codable {
-    let tripId: String?
-    let directionId: Int
-    let direction: String?
-    let locationTime: Int
-    let routeId: String?
-    let terminal: String?
-    let latitude: Float
-    let longitude: Float
-    let bearing: Float
-    let odometer: Float
-    let speed: Float
+    public let tripId: String?
+    public let directionId: Int
+    public let direction: String?
+    public let locationTime: Int
+    public let routeId: String?
+    public let terminal: String?
+    public let latitude: Float
+    public let longitude: Float
+    public let bearing: Float
+    public let odometer: Float
+    public let speed: Float
 }

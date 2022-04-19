@@ -6,9 +6,9 @@
 //
 
 public struct ProblemDetails: Codable {
-    let type: String?
-    let title: String?
-    let status: Int?
-    let detail: String?
-    let instance: String?
+    public let type: String?
+    public let title: String?
+    public let status: Int?
+    public let detail: String?
+    public let instance: String?
 }
