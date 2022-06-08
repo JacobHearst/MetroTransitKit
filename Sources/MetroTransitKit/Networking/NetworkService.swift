@@ -55,7 +55,8 @@ struct NetworkService {
                     }
 
                     print(httpError)
-                    completion(.failure(NetworkError.httpError(error: httpError)))
+                    let metroTransitErr = try JSONDecoder().decode(MetroTransitError.self, from: content)
+                    completion(.failure(NetworkError.httpError(error: metroTransitErr)))
                 }
             } catch {
                 print(error)
@@ -82,7 +83,7 @@ struct NetworkService {
 extension NetworkService {
     enum NetworkError: LocalizedError {
         case invalidUrl
-        case httpError(error: String)
+        case httpError(error: MetroTransitError)
         case decodingError(error: String)
         case nilResponseData
 
@@ -91,7 +92,7 @@ extension NetworkService {
             case .invalidUrl:
                 return "Tried to assemble an invalid url. Open an issue on the GitHub repo"
             case .httpError(let error):
-                return "HTTP Error: \(error)"
+                return "HTTP Error: \(error.detail)"
             case .decodingError(let error):
                 return error
             case .nilResponseData:
