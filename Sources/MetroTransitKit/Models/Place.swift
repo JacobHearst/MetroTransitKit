@@ -8,4 +8,9 @@
 public struct Place: Codable {
     public let placeCode: String?
     public let description: String?
+
+    public init(placeCode: String?, description: String?) {
+        self.placeCode = placeCode
+        self.description = description
+    }
 }

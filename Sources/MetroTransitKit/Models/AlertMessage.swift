@@ -8,4 +8,9 @@
 public struct AlertMessage: Codable {
     public let stopClosed: Bool
     public let alertText: String?
+
+    public init(stopClosed: Bool, alertText: String?) {
+        self.stopClosed = stopClosed
+        self.alertText = alertText
+    }
 }

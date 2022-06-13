@@ -17,4 +17,18 @@ public struct Vehicle: Codable {
     public let bearing: Float
     public let odometer: Float
     public let speed: Float
+
+    public init(tripId: String?, directionId: Int, direction: String?, locationTime: Int, routeId: String?, terminal: String?, latitude: Float, longitude: Float, bearing: Float, odometer: Float, speed: Float) {
+        self.tripId = tripId
+        self.directionId = directionId
+        self.direction = direction
+        self.locationTime = locationTime
+        self.routeId = routeId
+        self.terminal = terminal
+        self.latitude = latitude
+        self.longitude = longitude
+        self.bearing = bearing
+        self.odometer = odometer
+        self.speed = speed
+    }
 }

@@ -11,4 +11,12 @@ public struct ProblemDetails: Codable {
     public let status: Int?
     public let detail: String?
     public let instance: String?
+
+    public init(type: String?, title: String?, status: Int?, detail: String?, instance: String?) {
+        self.type = type
+        self.title = title
+        self.status = status
+        self.detail = detail
+        self.instance = instance
+    }
 }
