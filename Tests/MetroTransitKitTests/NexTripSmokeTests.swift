@@ -75,7 +75,7 @@ final class NexTripSmokeTests: XCTestCase {
     func testGetDirections() throws {
         let exp = expectation(description: "\(#function)")
 
-        client.nexTrip.getDirections(routeID: "901") { result in
+        client.nexTrip.getDirections(routeId: "901") { result in
             switch result {
             case .failure(let error):
                 XCTFail("Received error: \(error)")

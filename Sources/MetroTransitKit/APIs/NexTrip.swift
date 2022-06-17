@@ -41,8 +41,8 @@ public struct NexTripAPI {
         networkService.request(URLRequest(url: url), as: NexTripResult.self, completion: completion)
     }
 
-    public func getDirections(routeID: String, _ completion: @escaping (Result<[Direction], Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponents(["directions", routeId])
+    public func getDirections(routeId: String, _ completion: @escaping (Result<[Direction], Error>) -> Void) {
+        let request = URLRequest(url: baseURL.appendingPathComponents(["directions", routeId]))
         networkService.request(request, as: [Direction].self, completion: completion)
     }
 
@@ -55,7 +55,7 @@ public struct NexTripAPI {
     }
 
     public func getVehicles(routeID: String, completion: @escaping (Result<[Vehicle], Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponents(["vehicles", routeID])
+        let request = URLRequest(url: baseURL.appendingPathComponents(["vehicles", routeID]))
         networkService.request(request, as: [Vehicle].self, completion: completion)
     }
 }

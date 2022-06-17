@@ -24,7 +24,7 @@ public struct AlertsAPI {
     }
 
     public func getAlert(alertId: String, completion: @escaping (Result<IAlert, Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponents(["alert", alertId])
+        let request = URLRequest(url: baseURL.appendingPathComponents(["alert", alertId]))
         networkService.request(request, as: IAlert.self, completion: completion)
     }
 }
