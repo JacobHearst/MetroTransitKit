@@ -22,7 +22,7 @@ Add MetroTransitKit to your project either through the Xcode UI, or through the 
     let client = MetroTransitClient()
 
     // Retrieve information about the vehicles driving route 901
-    client.getVehicles(routeID: "901") { result in
+    client.nexTrip.getVehicles(routeID: "901") { result in
         switch result {
         case .success(let vehicles):
             print(vehicles[0].tripID)
