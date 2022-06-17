@@ -1,18 +1,16 @@
 //
-//  MetroTransitKit.swift
+//  NexTrip.swift
+//  
 //
-//
-//  Created by Jacob Hearst on 8/18/21.
+//  Created by Jacob Hearst on 6/17/22.
 //
 
 import Foundation
 
-public struct MetroTransitClient {
-    private let networkService: NetworkService
-    private let baseURL = URL(string: "https://svc.metrotransit.org/nextripv2/")!
-
-    public init(networkLogLevel: NetworkLogLevel = .minimal) {
-        networkService = NetworkService(logLevel: networkLogLevel)
+public struct NexTripAPI {
+    let networkService: NetworkService
+    var baseURL: URL {
+        NetworkService.baseURL.appendingPathComponent("nextripv2")
     }
 
     public func getAgencies(_ completion: @escaping (Result<[Agency], Error>) -> Void) {
@@ -26,7 +24,7 @@ public struct MetroTransitClient {
     }
 
     public func getNexTrip(stopID: Int, _ completion: @escaping (Result<NexTripResult, Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponent("\(stopID)"))
+        let request = URLRequest(url: baseURL.appendingPathComponent(String(stopID)))
         networkService.request(request, as: NexTripResult.self, completion: completion)
     }
 
@@ -44,7 +42,7 @@ public struct MetroTransitClient {
     }
 
     public func getDirections(routeID: String, _ completion: @escaping (Result<[Direction], Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponent("directions").appendingPathComponent(routeID))
+        let request = URLRequest(url: baseURL.appendingPathComponents(["directions", routeId])
         networkService.request(request, as: [Direction].self, completion: completion)
     }
 
@@ -57,7 +55,7 @@ public struct MetroTransitClient {
     }
 
     public func getVehicles(routeID: String, completion: @escaping (Result<[Vehicle], Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponent("vehicles").appendingPathComponent(routeID))
+        let request = URLRequest(url: baseURL.appendingPathComponents(["vehicles", routeID])
         networkService.request(request, as: [Vehicle].self, completion: completion)
     }
 }

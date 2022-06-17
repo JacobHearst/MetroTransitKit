@@ -12,6 +12,7 @@ public enum NetworkLogLevel {
 }
 
 struct NetworkService {
+    static let baseURL = URL(string: "https://svc.metrotransit.org")!
     var logLevel: NetworkLogLevel
 
     func request<T : Decodable>(_ urlRequest: URLRequest, as type: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
@@ -20,6 +21,25 @@ struct NetworkService {
             print(JSONString)
         }
 
+        request(urlRequest) { result in
+            do {
+                switch result {
+                case .success(let data):
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                    let result = try decoder.decode(type, from: data)
+                    completion(.success(result))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func request(_ urlRequest: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
                 print("Error: \(String(describing: error))")
@@ -45,8 +65,7 @@ struct NetworkService {
                         print(responseBody ?? "Couldn't represent response body as string")
                     }
 
-                    let result = try decoder.decode(type, from: content)
-                    completion(.success(result))
+                    completion(.success(content))
                 } else {
                     guard let httpError = String(data: content, encoding: .utf8) else {
                         let error = "Failed to create a string from the response data"
@@ -73,10 +92,6 @@ struct NetworkService {
             }
         }
         task.resume()
-    }
-
-    private func responseHandler(data: Data?, response: URLResponse?, error: Error?) {
-
     }
 }
 
