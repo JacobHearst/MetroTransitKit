@@ -95,6 +95,35 @@ struct NetworkService {
     }
 }
 
+@available(macOS 10.15.0, *)
+extension NetworkService {
+    func request<T : Decodable>(_ urlRequest: URLRequest, as type: T.Type) async throws -> T {
+        try await withCheckedThrowingContinuation { continuation in
+            self.request(urlRequest, as: type) { result in
+                switch result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(let err):
+                    continuation.resume(throwing: err)
+                }
+            }
+        }
+    }
+
+    func request(_ urlRequest: URLRequest) async throws -> Data {
+        try await withCheckedThrowingContinuation { continuation in
+            self.request(urlRequest) { result in
+                switch result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(let err):
+                    continuation.resume(throwing: err)
+                }
+            }
+        }
+    }
+}
+
 extension NetworkService {
     enum NetworkError: LocalizedError {
         case invalidUrl

@@ -114,3 +114,77 @@ public struct TripPlannerAPI {
         }
     }
 }
+
+@available(macOS 10.15.0, *)
+extension TripPlannerAPI {
+    public func getSuggestions(text: String, location: String) async throws -> [Suggestion] {
+        let request = URLRequest(url: baseURL.appendingPathComponents(["suggest", text, location]))
+        return try await networkService.request(request, as: [Suggestion].self)
+    }
+
+    public func findAddress(magicKey: String) async throws -> [FindAddressResponse] {
+        let request = URLRequest(url: baseURL.appendingPathComponents(["findaddress", magicKey]))
+        return try await networkService.request(request, as: [FindAddressResponse].self)
+    }
+
+    public func planTrip(input: PlanTripInput) async throws {
+        var request = URLRequest(url: baseURL.appendingPathComponent("plantrip"))
+        request.httpMethod = "POST"
+        do {
+            request.httpBody = try JSONEncoder().encode(input)
+        } catch {
+            throw error
+        }
+
+        let result = try await networkService.request(request)
+        return
+    }
+
+    public func moreInfo(moreInfo: String) async throws {
+        var request = URLRequest(url: baseURL.appendingPathComponent("moreinfo"))
+        request.httpMethod = "POST"
+        request.httpBody = moreInfo.data(using: .utf8)
+
+        let result = try await networkService.request(request)
+        return
+    }
+
+    public func serviceNearby(input: ServiceNearbyInput) async throws {
+        var request = URLRequest(url: baseURL.appendingPathComponent("servicenearby"))
+        request.httpMethod = "POST"
+        do {
+            request.httpBody = try JSONEncoder().encode(input)
+        } catch {
+            throw error
+        }
+
+        let result = try await networkService.request(request)
+        return
+    }
+
+    public func nearestLandmark(input: NearestLandmarkInput) async throws {
+        var request = URLRequest(url: baseURL.appendingPathComponent("nearsetlandmark"))
+        request.httpMethod = "POST"
+        do {
+            request.httpBody = try JSONEncoder().encode(input)
+        } catch {
+            throw error
+        }
+
+        let result = try await networkService.request(request)
+        return
+    }
+
+    public func routeLandmarks(input: RouteLandmarksInput) async throws {
+        var request = URLRequest(url: baseURL.appendingPathComponent("routelandmarks"))
+        request.httpMethod = "POST"
+        do {
+            request.httpBody = try JSONEncoder().encode(input)
+        } catch {
+            throw error
+        }
+
+        let result = try await networkService.request(request)
+        return
+    }
+}

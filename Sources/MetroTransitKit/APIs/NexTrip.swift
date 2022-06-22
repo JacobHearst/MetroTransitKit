@@ -59,3 +59,51 @@ public struct NexTripAPI {
         networkService.request(request, as: [Vehicle].self, completion: completion)
     }
 }
+
+@available(macOS 10.15.0, *)
+extension NexTripAPI {
+    public func getAgencies() async throws -> [Agency] {
+        let request = URLRequest(url: baseURL.appendingPathComponent("agencies"))
+        return try await networkService.request(request, as: [Agency].self)
+    }
+
+    public func getRoutes() async throws -> [Route] {
+        let request = URLRequest(url: baseURL.appendingPathComponent("routes"))
+        return try await networkService.request(request, as: [Route].self)
+    }
+
+    public func getNexTrip(stopID: Int) async throws -> NexTripResult {
+        let request = URLRequest(url: baseURL.appendingPathComponent(String(stopID)))
+        return try await networkService.request(request, as: NexTripResult.self)
+    }
+
+    public func getNexTrip(routeID: String,
+                           directionID: Int,
+                           placeCode: String) async throws -> NexTripResult {
+
+        let url = baseURL
+            .appendingPathComponent(routeID)
+            .appendingPathComponent("\(directionID)")
+            .appendingPathComponent("\(placeCode)")
+
+        return try await networkService.request(URLRequest(url: url), as: NexTripResult.self)
+    }
+
+    public func getDirections(routeId: String) async throws -> [Direction] {
+        let request = URLRequest(url: baseURL.appendingPathComponents(["directions", routeId]))
+        return try await networkService.request(request, as: [Direction].self)
+    }
+
+    public func getStops(routeID: String, directionID: Int) async throws -> [Place] {
+        let url = baseURL
+            .appendingPathComponent("stops")
+            .appendingPathComponent(routeID)
+            .appendingPathComponent("\(directionID)")
+        return try await networkService.request(URLRequest(url: url), as: [Place].self)
+    }
+
+    public func getVehicles(routeID: String) async throws -> [Vehicle] {
+        let request = URLRequest(url: baseURL.appendingPathComponents(["vehicles", routeID]))
+        return try await networkService.request(request, as: [Vehicle].self)
+    }
+}

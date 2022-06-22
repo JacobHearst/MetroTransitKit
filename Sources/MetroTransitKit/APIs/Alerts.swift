@@ -28,3 +28,21 @@ public struct AlertsAPI {
         networkService.request(request, as: IAlert.self, completion: completion)
     }
 }
+
+@available(macOS 10.15.0, *)
+extension AlertsAPI {
+    public func getAlerts() async throws -> [IAlert] {
+        let request = URLRequest(url: baseURL.appendingPathComponent("all"))
+        return try await networkService.request(request, as: [IAlert].self)
+    }
+
+    public func getAlerts(routeId: String) async throws -> [IAlert] {
+        let request = URLRequest(url: baseURL.appendingPathComponent(routeId))
+        return try await networkService.request(request, as: [IAlert].self)
+    }
+
+    public func getAlert(alertId: String) async throws -> IAlert {
+        let request = URLRequest(url: baseURL.appendingPathComponents(["alert", alertId]))
+        return try await networkService.request(request, as: IAlert.self)
+    }
+}
