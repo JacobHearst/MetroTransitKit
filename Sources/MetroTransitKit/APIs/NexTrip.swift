@@ -60,7 +60,7 @@ public struct NexTripAPI {
     }
 }
 
-@available(macOS 10.15.0, *)
+@available(macOS 10.15.0, iOS 13.0.0, *)
 extension NexTripAPI {
     public func getAgencies() async throws -> [Agency] {
         let request = URLRequest(url: baseURL.appendingPathComponent("agencies"))

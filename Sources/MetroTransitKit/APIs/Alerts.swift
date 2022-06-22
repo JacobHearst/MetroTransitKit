@@ -29,7 +29,7 @@ public struct AlertsAPI {
     }
 }
 
-@available(macOS 10.15.0, *)
+@available(macOS 10.15.0, iOS 13.0.0, *)
 extension AlertsAPI {
     public func getAlerts() async throws -> [IAlert] {
         let request = URLRequest(url: baseURL.appendingPathComponent("all"))

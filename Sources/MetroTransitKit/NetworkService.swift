@@ -95,7 +95,7 @@ struct NetworkService {
     }
 }
 
-@available(macOS 10.15.0, *)
+@available(macOS 10.15.0, iOS 13.0.0, *)
 extension NetworkService {
     func request<T : Decodable>(_ urlRequest: URLRequest, as type: T.Type) async throws -> T {
         try await withCheckedThrowingContinuation { continuation in

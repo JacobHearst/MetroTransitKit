@@ -115,7 +115,7 @@ public struct TripPlannerAPI {
     }
 }
 
-@available(macOS 10.15.0, *)
+@available(macOS 10.15.0, iOS 13.0.0, *)
 extension TripPlannerAPI {
     public func getSuggestions(text: String, location: String) async throws -> [Suggestion] {
         let request = URLRequest(url: baseURL.appendingPathComponents(["suggest", text, location]))
@@ -127,7 +127,7 @@ extension TripPlannerAPI {
         return try await networkService.request(request, as: [FindAddressResponse].self)
     }
 
-    public func planTrip(input: PlanTripInput) async throws {
+    public func planTrip(input: PlanTripInput) async throws -> Data {
         var request = URLRequest(url: baseURL.appendingPathComponent("plantrip"))
         request.httpMethod = "POST"
         do {
@@ -136,20 +136,18 @@ extension TripPlannerAPI {
             throw error
         }
 
-        let result = try await networkService.request(request)
-        return
+        return try await networkService.request(request)
     }
 
-    public func moreInfo(moreInfo: String) async throws {
+    public func moreInfo(moreInfo: String) async throws -> Data {
         var request = URLRequest(url: baseURL.appendingPathComponent("moreinfo"))
         request.httpMethod = "POST"
         request.httpBody = moreInfo.data(using: .utf8)
 
-        let result = try await networkService.request(request)
-        return
+        return try await networkService.request(request)
     }
 
-    public func serviceNearby(input: ServiceNearbyInput) async throws {
+    public func serviceNearby(input: ServiceNearbyInput) async throws -> Data {
         var request = URLRequest(url: baseURL.appendingPathComponent("servicenearby"))
         request.httpMethod = "POST"
         do {
@@ -158,11 +156,10 @@ extension TripPlannerAPI {
             throw error
         }
 
-        let result = try await networkService.request(request)
-        return
+        return try await networkService.request(request)
     }
 
-    public func nearestLandmark(input: NearestLandmarkInput) async throws {
+    public func nearestLandmark(input: NearestLandmarkInput) async throws -> Data {
         var request = URLRequest(url: baseURL.appendingPathComponent("nearsetlandmark"))
         request.httpMethod = "POST"
         do {
@@ -171,11 +168,10 @@ extension TripPlannerAPI {
             throw error
         }
 
-        let result = try await networkService.request(request)
-        return
+        return try await networkService.request(request)
     }
 
-    public func routeLandmarks(input: RouteLandmarksInput) async throws {
+    public func routeLandmarks(input: RouteLandmarksInput) async throws -> Data {
         var request = URLRequest(url: baseURL.appendingPathComponent("routelandmarks"))
         request.httpMethod = "POST"
         do {
@@ -184,7 +180,6 @@ extension TripPlannerAPI {
             throw error
         }
 
-        let result = try await networkService.request(request)
-        return
+        return try await networkService.request(request)
     }
 }

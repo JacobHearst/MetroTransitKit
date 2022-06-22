@@ -43,7 +43,7 @@ public struct ScheduleAPI {
     }
 }
 
-@available(macOS 10.15.0, *)
+@available(macOS 10.15.0, iOS 13.0.0, *)
 extension ScheduleAPI {
     public func getRoutes() async throws -> [RouteListItem] {
         let request = URLRequest(url: baseURL.appendingPathComponent("routes"))
